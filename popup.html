@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoGuessr AZERTY Fix</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .header h1 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .header p {
+            margin: 0;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .content {
+            padding: 20px;
+            color: white;
+        }
+        
+        .status {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .status-active {
+            background: rgba(76, 175, 80, 0.3);
+        }
+        
+        .status-inactive {
+            background: rgba(244, 67, 54, 0.3);
+        }
+        
+        .binds {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .binds h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .bind-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .bind-item:last-child {
+            border-bottom: none;
+        }
+        
+        .key {
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 3px 10px;
+            border-radius: 5px;
+        }
+        
+        .emote {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌍 AZERTY Fix</h1>
+        <p>Extension active pour GeoGuessr</p>
+    </div>
+    
+    <div class="content">
+        <div class="status status-active">
+            <strong>✅ Extension activée</strong><br>
+            <small>Vos raccourcis fonctionnent !</small>
+        </div>
+        
+        <div class="binds">
+            <h3>🎮 Raccourcis configurés :</h3>
+            <div class="bind-item">
+                <span class="key">è</span>
+                <span class="emote">→ Emote 1</span>
+            </div>
+            <div class="bind-item">
+                <span class="key">é</span>
+                <span class="emote">→ Emote 2</span>
+            </div>
+            <div class="bind-item">
+                <span class="key">"</span>
+                <span class="emote">→ Emote 3</span>
+            </div>
+            <div class="bind-item">
+                <span class="key">&</span>
+                <span class="emote">→ Emote 4</span>
+            </div>
+            <div class="bind-item">
+                <span class="key">(</span>
+                <span class="emote">→ Emote 5</span>
+            </div>
+            <div class="bind-item">
+                <span class="key">'</span>
+                <span class="emote">→ Emote 6</span>
+            </div>
+            <div class="bind-item">
+                <span class="key">-</span>
+                <span class="emote">→ Emote 7</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
