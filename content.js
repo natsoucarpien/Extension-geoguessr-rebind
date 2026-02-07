@@ -107,16 +107,6 @@ function isSoloGame() {
   return window.location.pathname.includes('/game/');
 }
 
-// Fonction pour détecter si on est en partie multi
-function isMultiGame() {
-  const path = window.location.pathname;
-  return path.includes('/duels/') ||
-         path.includes('/battle-royale/') ||
-         path.includes('/team-duels/') ||
-         path.includes('/challenge/') ||
-         (path.includes('/') && !path.includes('/game/') && document.querySelector('[class*="players"]'));
-}
-
 // Fonction pour mettre à jour l'affichage de l'overlay automatiquement
 function updateOverlayAuto() {
   if (manualOverride) return; // Ne pas modifier si l'utilisateur a override manuellement
@@ -128,8 +118,6 @@ function updateOverlayAuto() {
   const shouldShow = !isSoloGame(); // Afficher si on n'est PAS en solo
   overlayVisible = shouldShow;
   overlayElement.style.display = overlayVisible ? 'block' : 'none';
-
-  console.log(`Overlay ${overlayVisible ? 'affiché' : 'masqué'} automatiquement (${isSoloGame() ? 'solo' : 'multi'})`);
 }
 
 // Fonction pour toggle l'overlay manuellement
@@ -141,8 +129,6 @@ function toggleOverlay() {
   overlayVisible = !overlayVisible;
   overlayElement.style.display = overlayVisible ? 'block' : 'none';
   manualOverride = true; // L'utilisateur a pris le contrôle manuel
-
-  console.log(`Overlay ${overlayVisible ? 'affiché' : 'masqué'} manuellement`);
 }
 
 // Initialiser l'overlay au chargement de la page
@@ -150,28 +136,32 @@ function initOverlay() {
   updateOverlayAuto(); // Affichage automatique selon le contexte
 }
 
-// Observer les changements d'URL pour détecter les changements de partie
+// Détecter les changements d'URL via les APIs de navigation (pas de MutationObserver)
 function observeUrlChanges() {
-  const observer = new MutationObserver(() => {
+  function onUrlChange() {
     const currentUrl = window.location.href;
     if (currentUrl !== lastUrl) {
       lastUrl = currentUrl;
-      manualOverride = false; // Réinitialiser l'override manuel lors du changement de page
+      manualOverride = false;
       updateOverlayAuto();
     }
-  });
+  }
 
-  observer.observe(document.querySelector('body'), {
-    childList: true,
-    subtree: true
-  });
+  // Intercepter pushState et replaceState (navigation SPA)
+  const originalPushState = history.pushState;
+  const originalReplaceState = history.replaceState;
+  history.pushState = function(...args) {
+    originalPushState.apply(this, args);
+    onUrlChange();
+  };
+  history.replaceState = function(...args) {
+    originalReplaceState.apply(this, args);
+    onUrlChange();
+  };
+
+  // Détecter popstate (boutons précédent/suivant)
+  window.addEventListener('popstate', onUrlChange);
 }
-
-// Détecter aussi les changements avec popstate (navigation navigateur)
-window.addEventListener('popstate', () => {
-  manualOverride = false;
-  updateOverlayAuto();
-});
 
 // Attendre que le DOM soit chargé
 if (document.readyState === 'loading') {
@@ -215,10 +205,5 @@ document.addEventListener('keydown', function(event) {
 
     // Envoie le nouvel événement à l'élément qui avait le focus
     event.target.dispatchEvent(newEvent);
-
-    // Affiche un message dans la console pour déboguer (optionnel)
-    console.log(`AZERTY Fix: ${event.key} → ${numberKey}`);
   }
 }, true);
-
-console.log('GeoGuessr AZERTY Fix activé ! Vous pouvez maintenant utiliser è é " & ( \' - pour les emotes. Appuyez sur ² pour afficher/masquer l\'overlay.');
