@@ -11,6 +11,12 @@
       "run_at": "document_start"
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["emote-icons/*.webp"],
+      "matches": ["*://*.geoguessr.com/*"]
+    }
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
