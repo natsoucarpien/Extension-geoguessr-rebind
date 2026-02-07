@@ -1,4 +1,4 @@
-# GeoGuessr AZERTY Fix
+# Geoguessr emote rebind
 
 Extension Chrome permettant de rebind les emotes de GeoGuessr sur les touches du clavier AZERTY français, avec un overlay in-game affichant les raccourcis visuellement.
 

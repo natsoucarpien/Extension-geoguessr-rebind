@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "GeoGuessr AZERTY Fix",
+  "name": "Geoguessr emote rebind",
   "version": "1.0",
   "description": "Active les raccourcis d'emotes (1-6) pour les claviers AZERTY français sur GeoGuessr",
   "permissions": [],
